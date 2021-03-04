@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html ng-app="universidadApp" ng-controller="mainCtrl">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Coolcalc Training School</title>
+
+        <!-- Include AngularJS -->
+        <script src="https://code.angularjs.org/1.3.15/angular.min.js"></script>
+        <script src="https://code.angularjs.org/1.3.15/angular-route.min.js"></script>
+
+        <script src="js/app.js"></script>
+        <script src="js/config.js"></script>
+
+        <!-- Controladores-->
+        <script src="js/coolcalcCrt.js"></script>
+        <script src="js/teachersCtrl.js"></script>
+        <script src="js/homeCRTL.js"></script>
+
+        <!--- Leaflet CSS. -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+
+        <!--- Styles for Leaflet geoman-io plugin. -->
+        <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css" />
+
+        <!--- Styles for Leaflet.Measure.Path plugin. -->
+        <link rel="stylesheet" href="https://cdn.coolcalc.com/leaflet-measure-path/leaflet-measure-path.css" />
+
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,700,900&display=swap" rel="stylesheet">
+        
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        
+        <!-- Bootstrap 4 CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" crossorigin="anonymous">
+
+        <!--- CoolCalc REST UI styles (personaliza os colores pra el usuario)-->
+        <link rel="stylesheet" href="https://cdn.coolcalc.com/css/mj8/v-bootstrap/staging/restui.css">
+
+        <!--- Local CoolCalc styles. -->
+        <link rel="stylesheet" href="css/coolcalc.css">
+
+        <!--- Additional CoolCalc styles for printable MJ8 report. (verificar si esta bien aqui)-->
+        <link rel="stylesheet" href="https://cdn.coolcalc.com/css/mj8/v-bootstrap/staging/print.css">
+
+    </head>
+    <body>
+
+        <div ng-include="menuSuperior"></div>
+
+        <div class="container mt-4">
+
+            <!-- Here the content of the pages will be displayed -->
+            <div ng-view></div>
+
+        </div>
+
+        <!--- Google maps library. -->
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=YOUR_API_KEY_HERE"></script>
+
+        <!--- Google charts library. -->
+        <script src="https://www.gstatic.com/charts/loader.js"></script>
+
+        <!-- Leaflet. -->
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+
+        <!-- Leaflet.GridLayer.GoogleMutant -->
+        <script src='https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js'></script>
+
+        <!-- Leaflet geoman-io plugin. -->
+        <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>
+
+        <!-- Leaflet.Measure.Path-->
+        <script src="https://cdn.coolcalc.com/leaflet-measure-path/leaflet-measure-path.js"></script>
+
+        <!--Bootstrap Javascript-->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+        <!--- KhipuJS REST client JavaScript library. -->
+        <script src="https://cdn.coolcalc.com/khipu-js/staging/khipu.js"></script>
+
+        <!-- Map trace library -->
+        <script src="https://cdn.coolcalc.com/javascript/map-trace/staging/mt-widget.js"></script>
+
+        <!--- CoolCalc MJ8 JavaScript library. -->
+        <script src="https://cdn.coolcalc.com/javascript/mj8/shared/staging/mj8.js"></script>
+        <script src="https://cdn.coolcalc.com/javascript/mj8/v-bootstrap/staging/tools.js"></script>
+
+        <!--- Khipu callbacks, these may be framework dependent so we separate them from the main JavaScript library. -->
+        <script src="https://cdn.coolcalc.com/khipu-callbacks/mj8/v-bootstrap/staging/khipu-callbacks.js"></script>
+
+        <!--- Local JavaScript to initialize the CoolCalc application. (ver que hacen estos 2 archivos)-->
+        <script type="text/javascript" src="js/coolcalc/libmj8.js" ></script>
+        <script type="text/javascript" src="js/coolcalc/fun-factory.js" ></script>
+      
+  
+        <!-- Initialize coolcalc library, when there is a div with id "coolcalc-ui" in DOM -->
+        <script>
+            var refreshIntervalId = setInterval(myTimer, 1000);
+
+            function myTimer() {
+                var myDiv = document.getElementById("coolcalc-ui");
+                console.log(myDiv);
+                if (myDiv){
+                    // Initialize the CoolCalc single page REST UI on the requested resource or default MJ8 project list.
+                    libMJ8.landingPage(myFunFactory);
+                    clearInterval(refreshIntervalId);
+                }else{
+                    console.log("No DOM element.")
+                }
+            }
+
+        </script>
+
+    </body>
+</html>
